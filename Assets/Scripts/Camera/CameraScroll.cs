@@ -8,9 +8,9 @@ public class CameraScroll : MonoBehaviour
     private Camera m_cam;
 
     [Header("Scroll Settings")]
-    float m_scrollSensitivity = 1.0f;
-    float m_minScaleValue = 1.0f;
-    float m_maxScaleValue = 10.0f;
+    [SerializeField] private float m_scrollSensitivity = 1.0f;
+    [SerializeField] private float m_minScaleValue = 1.0f;
+    [SerializeField] private float m_maxScaleValue = 10.0f;
 
     void Start()
     {
@@ -19,10 +19,16 @@ public class CameraScroll : MonoBehaviour
 
     void Update()
     {
-        float dt = Input.mouseScrollDelta.y;
-        m_cam.orthographicSize += dt * m_scrollSensitivity;
+        float scrollDelta = Input.mouseScrollDelta.y;
 
-        Vector3 offset = m_cam.ScreenToWorldPoint(Input.mousePosition) - m_cam.transform.position;
-        m_cam.transform.position += offset * m_scrollSensitivity * dt;
+        Vector3 mousePosBefore = m_cam.ScreenToWorldPoint(Input.mousePosition);
+
+        m_cam.orthographicSize = Mathf.Clamp(
+            m_cam.orthographicSize - scrollDelta * m_scrollSensitivity,
+            m_minScaleValue,
+            m_maxScaleValue
+        );
+
+        m_cam.transform.position += mousePosBefore - m_cam.ScreenToWorldPoint(Input.mousePosition);
     }
 }
