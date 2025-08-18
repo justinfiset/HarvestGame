@@ -35,7 +35,7 @@ public class Tool : Item
 
     public void Use(Vector2 position)
     {
-        if (strategy != null) strategy.Use(CropManager.Instance, position);
+        strategy?.Use(CropManager.Instance, position);
     }
 }
 
@@ -43,7 +43,7 @@ public class Hoe : Tool
 {
     public Hoe() : base("Hoe", "Use this to till the soil and prepare it for planting.", "Hoe", (manager, pos) =>
     {
-        manager.AddFieldPlot(pos);
+        manager.Plow(pos);
     }) { }
 }
 
@@ -53,4 +53,13 @@ public class WateringCan : Tool
     {
         manager.WaterPlot(pos);
     }) { }
+}
+
+public class Shovel : Tool
+{
+    public Shovel() : base("Shovel", "Use this to unplow your plot.", "Shovel", (manager, pos) =>
+    {
+        manager.Unplow(pos);
+    })
+    { }
 }

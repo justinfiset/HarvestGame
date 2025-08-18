@@ -54,7 +54,9 @@ public class OrderQueue : MonoBehaviour
     {
         if (m_pendingOrders.Count == 0) return;
 
-        m_currentOrder = Instantiate(m_customerPrefab, transform).GetComponent<CustomerOrder>();
+        GameObject instance = Instantiate(m_customerPrefab, transform);
+        m_currentOrder = instance.GetComponentInChildren<CustomerOrder>();
+
         CustomerOrderList orderList = m_pendingOrders.Pop();
         m_currentOrder.Setup(orderList);
 

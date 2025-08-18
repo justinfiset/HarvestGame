@@ -12,7 +12,13 @@ public class Inventory : MonoBehaviour
     [SerializeField] private GameObject m_slotTemplate;
     [SerializeField] private GameObject m_slotbarContainer;
     [SerializeField] private GameObject m_inventoryContainer;
+    [SerializeField] private Image m_inventoryBackground;
+    [SerializeField] private InteractionZone m_usageZone;
+
+    [Header("Cursor")]
+    // TODO : MOVE TO A CURSOR DEDICATED SCRIPT
     [SerializeField] private Image m_cursor;
+    [SerializeField] private Image m_cursorError;
 
     private int m_currentSlotbarIndex = 0;
     private bool m_isShowing = false;
@@ -22,7 +28,11 @@ public class Inventory : MonoBehaviour
     private void Start()
     {
         for(int i = 0; i < s_slotbarCount; i++)
-            m_slots.Add(Instantiate(m_slotTemplate, m_slotbarContainer.transform).GetComponent<Slot>());
+        {
+            Slot slot = Instantiate(m_slotTemplate, m_slotbarContainer.transform).GetComponent<Slot>();
+            m_slots.Add(slot);
+            slot.SetVisibility(true, i * 0.1f);
+        }
 
         for (int i = 4; i < s_slotCount; i++)
             m_slots.Add(Instantiate(m_slotTemplate, m_inventoryContainer.transform).GetComponent<Slot>());
@@ -32,6 +42,7 @@ public class Inventory : MonoBehaviour
 
         AddItem(new Hoe());
         AddItem(new WateringCan());
+        AddItem(new Shovel());
     }
 
     void Update()
@@ -49,10 +60,18 @@ public class Inventory : MonoBehaviour
             Show(!m_isShowing);
         }
 
-        if(Input.GetKeyDown(KeyCode.Mouse0))
+        if (m_usageZone.Contains(Camera.main.ScreenToWorldPoint(Input.mousePosition)))
         {
-            Item it = m_slots[m_currentSlotbarIndex].item;
-            it?.useAction();
+            m_cursorError.color = Color.clear; // Hide the warning
+
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                Item it = m_slots[m_currentSlotbarIndex].item;
+                it?.useAction();
+            }
+        } else
+        {
+            m_cursorError.color = Color.white;
         }
     }
 
@@ -71,6 +90,15 @@ public class Inventory : MonoBehaviour
     void Show(bool showStatus)
     {
         m_isShowing = showStatus;
+
+        float newX = showStatus ? 570 : 130;
+        LeanTween.moveX(m_inventoryBackground.gameObject, newX, 0.1f);
+
+        for(int i = s_slotbarCount; i < s_slotCount; i++)
+        {
+            m_slots[i].SetVisibility(m_isShowing, 0.02f * i);
+        }
+
         m_inventoryContainer.SetActive(showStatus);
     }
 

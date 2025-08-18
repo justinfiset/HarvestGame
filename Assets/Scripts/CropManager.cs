@@ -33,19 +33,31 @@ public class CropManager : MonoBehaviour
         return new Vector2(worldX, worldY);
     }
 
-    public void AddFieldPlot(Vector2 position)
+    public void Plow(Vector2 position)
     {
-        Vector2 pos = GetTilePosition(position);
+        Vector2 tilePos = GetTilePosition(position);
 
-        if(!m_plots.ContainsKey(pos))
+        if(m_plots.TryGetValue(tilePos, out FieldPlot plot))
+        {
+            plot.Plow();
+        } else
         {
             GameObject obj = Instantiate(m_fieldPlotInstance, transform);
-            obj.transform.position = pos;
+            obj.transform.position = tilePos;
 
-            FieldPlot plot = obj.GetComponent<FieldPlot>();
-
-            m_plots[pos] = plot;
+            FieldPlot newPlot = obj.GetComponent<FieldPlot>();
+            m_plots[tilePos] = newPlot;
         }
+    }
+
+    public void Unplow(Vector2 position)
+    {
+        Vector2 tilePos = GetTilePosition(position);
+        if(m_plots.TryGetValue(tilePos, out FieldPlot plot))
+        {
+            Destroy(plot.gameObject);
+        }
+        m_plots.Remove(tilePos);
     }
 
     public void WaterPlot(Vector2 position)
@@ -53,7 +65,7 @@ public class CropManager : MonoBehaviour
         Vector2 pos = GetTilePosition(position);
         if(m_plots.TryGetValue(pos, out FieldPlot plot))
         {
-            plot.SetWaterStatus(true);
+            plot.WaterPlot();
         }
     }
 }
