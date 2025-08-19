@@ -4,4 +4,15 @@ using UnityEngine;
 
 public class Crop
 {
+    public CropData cropData;
+
+    public Crop(CropData data)
+    {
+        cropData = data;
+    }
+
+    public string GetName() 
+    {
+        return cropData.name;
+    }
 }

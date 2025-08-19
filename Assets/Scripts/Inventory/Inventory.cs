@@ -8,6 +8,9 @@ public class Inventory : MonoBehaviour
     private static int s_slotbarCount = 4;
     private static int s_slotCount = 20;
 
+    [Header("Debug")]
+    [SerializeField] private CropCollection m_cropCollection;
+
     [Header("UI")]
     [SerializeField] private GameObject m_slotTemplate;
     [SerializeField] private GameObject m_slotbarContainer;
@@ -43,6 +46,16 @@ public class Inventory : MonoBehaviour
         AddItem(new Hoe());
         AddItem(new WateringCan());
         AddItem(new Shovel());
+        AddItem(m_cropCollection.Get(CropType.Carrot).GetSeed());
+    }
+
+    public void UseItem()
+    {
+        if (m_usageZone.Contains(Camera.main.ScreenToWorldPoint(Input.mousePosition)))
+        {
+            Item it = m_slots[m_currentSlotbarIndex].item;
+            it?.useAction();
+        }
     }
 
     void Update()
@@ -63,12 +76,6 @@ public class Inventory : MonoBehaviour
         if (m_usageZone.Contains(Camera.main.ScreenToWorldPoint(Input.mousePosition)))
         {
             m_cursorError.color = Color.clear; // Hide the warning
-
-            if (Input.GetKeyDown(KeyCode.Mouse0))
-            {
-                Item it = m_slots[m_currentSlotbarIndex].item;
-                it?.useAction();
-            }
         } else
         {
             m_cursorError.color = Color.white;
@@ -91,15 +98,33 @@ public class Inventory : MonoBehaviour
     {
         m_isShowing = showStatus;
 
-        float newX = showStatus ? 570 : 130;
-        LeanTween.moveX(m_inventoryBackground.gameObject, newX, 0.1f);
+        if (showStatus) Show();
+        else Hide();
+    }
 
-        for(int i = s_slotbarCount; i < s_slotCount; i++)
+    void Show()
+    {
+        float newX = 570;
+        LeanTween.moveX(m_inventoryBackground.gameObject, newX, 0.1f).setOnComplete(() => {
+            m_inventoryContainer.SetActive(true);
+
+            for (int i = s_slotbarCount; i < s_slotCount; i++)
+            {
+                m_slots[i].SetVisibility(m_isShowing, 0.02f * i);
+            }
+        });
+    }
+
+    void Hide()
+    {
+        float newX = 130;
+        LeanTween.moveX(m_inventoryBackground.gameObject, newX, 0.1f);
+        m_inventoryContainer.SetActive(false);
+
+        for (int i = s_slotCount - 1; i >= s_slotbarCount; i--)
         {
             m_slots[i].SetVisibility(m_isShowing, 0.02f * i);
         }
-
-        m_inventoryContainer.SetActive(showStatus);
     }
 
     public bool AddItem(Item item, int quantity = 1)
@@ -121,17 +146,20 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < m_slots.Count; i++)
+        if(quantity > 0)
         {
-            if (m_slots[i].item == null)
+            for (int i = 0; i < m_slots.Count; i++)
             {
-                int stackAmount = item.stackable ? Mathf.Min(quantity, item.maxStack) : 1;
-                m_slots[i].SetItem(item, stackAmount);
-                quantity -= stackAmount;
+                if (m_slots[i].item == null)
+                {
+                    int stackAmount = item.stackable ? Mathf.Min(quantity, item.maxStack) : 1;
+                    m_slots[i].SetItem(item, stackAmount);
+                    quantity -= stackAmount;
 
-                m_slots[i].UpdatePlaceholder();
+                    m_slots[i].UpdatePlaceholder();
 
-                if (quantity == 0) break;
+                    if (quantity == 0) break;
+                }
             }
         }
 

@@ -22,8 +22,8 @@ public class Tool : Item
 
     private ToolStrategy strategy;
 
-    public Tool(string name, string description, string spriteId, Action<CropManager, Vector2> useFn)
-        : base(name, description, TextureDatabase.Get(spriteId), false, 1)
+    public Tool(string name, string description, Sprite sprite, Action<CropManager, Vector2> useFn = null)
+        : base(name, description, sprite, false, 1)
     {
         this.strategy = new ToolStrategy(useFn);
 
@@ -32,6 +32,10 @@ public class Tool : Item
             Use(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         });
     }
+
+    public Tool(string name, string description, string spriteId, Action<CropManager, Vector2> useFn = null)
+        : this(name, description, TextureDatabase.Get(spriteId), useFn)
+    { }
 
     public void Use(Vector2 position)
     {

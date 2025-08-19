@@ -19,25 +19,25 @@ public class OrderQueue : MonoBehaviour
         // TODO REMOVE, FOR TEST PURPOSES ONLY
         List<CustomerOrderItem> list = new List<CustomerOrderItem>();
 
-        CustomerOrderItem item = new CustomerOrderItem();
-        item.crop = new Crop();
-        item.quantity = 2;
-        list.Add(item);
+        //CustomerOrderItem item = new CustomerOrderItem();
+        //item.crop = new Crop();
+        //item.quantity = 2;
+        //list.Add(item);
 
-        CustomerOrderList order = new CustomerOrderList();
-        order.totalTime = 5.0f;
-        order.items = list;
+        //CustomerOrderList order = new CustomerOrderList();
+        //order.totalTime = 5.0f;
+        //order.items = list;
 
-        AddOrder(order);
+        //AddOrder(order);
 
 
-        item.crop = new Crop();
-        item.quantity = 2;
-        list.Add(item);
-        order.totalTime = 5.0f;
-        order.items = list;
+        //item.crop = new Crop();
+        //item.quantity = 2;
+        //list.Add(item);
+        //order.totalTime = 5.0f;
+        //order.items = list;
 
-        AddOrder(order);
+        //AddOrder(order);
     }
 
     public void AddOrder(CustomerOrderList order)

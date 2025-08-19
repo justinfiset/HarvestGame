@@ -18,7 +18,7 @@ MonoBehaviour:
   - id: Watering Can
     sprite: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
   - id: Shovel
-    sprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+    sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   - id: regular slot
     sprite: {fileID: 1107377631, guid: 514c22c5b2886bc4ebc161ebad98c087, type: 3}
   - id: selected slot

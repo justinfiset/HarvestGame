@@ -16,6 +16,7 @@ public class Slot : MonoBehaviour
     private Image m_backgroundImage;
     private CanvasGroup m_canvasGroup;
     [SerializeField] private Image m_icon;
+    [SerializeField] private TMPro.TextMeshProUGUI m_quantityText;
 
     private void Awake()
     {
@@ -41,6 +42,8 @@ public class Slot : MonoBehaviour
     {
         m_icon.sprite = (item != null) ? item.icon : null;
         m_icon.color = (m_icon.sprite == null) ? Color.clear : Color.white;
+
+        m_quantityText.text = (quantity > 1) ? quantity.ToString() : "";
     }
 
     public void SetVisibility(bool visibility, float animationDuration)

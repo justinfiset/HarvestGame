@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
-public class InteractionZone : MonoBehaviour
+public abstract class ZoneBehaviour : MonoBehaviour
 {
     [HideInInspector] public Vector2 min; // lower left corner
     [HideInInspector] public Vector2 max; // upper right corner
+
     private BoxCollider2D col;
 
     private void Awake()
@@ -19,9 +20,9 @@ public class InteractionZone : MonoBehaviour
         max = center + extends;
     }
 
-    public bool Contains(Vector2 point)
+    public virtual bool Contains(Vector2 point)
     {
         return point.x >= min.x && point.x <= max.x &&
-               point.y >= min.y && point.y <= max.y;
+                   point.y >= min.y && point.y <= max.y;
     }
 }
