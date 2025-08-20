@@ -268,7 +268,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f69c63f2dbef0c469b96ba889a92e06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_tileAsset: {fileID: 11400000, guid: d624982172d873d45ae81e11cfcd4744, type: 2}
+  m_regularTileAsset: {fileID: 11400000, guid: 379ca620c70575d4b93309b0a011ca86, type: 2}
+  m_wateredTileAsset: {fileID: 11400000, guid: d624982172d873d45ae81e11cfcd4744, type: 2}
   m_plowStages:
   - {fileID: -1980057495, guid: 35e2ebf58b1ccf3448b3549b5ac2ec91, type: 3}
   - {fileID: 834975930, guid: 35e2ebf58b1ccf3448b3549b5ac2ec91, type: 3}

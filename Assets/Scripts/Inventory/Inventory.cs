@@ -8,6 +8,8 @@ public class Inventory : MonoBehaviour
     private static int s_slotbarCount = 4;
     private static int s_slotCount = 20;
 
+    public Player player;
+
     [Header("Debug")]
     [SerializeField] private CropCollection m_cropCollection;
 
@@ -49,12 +51,17 @@ public class Inventory : MonoBehaviour
         AddItem(m_cropCollection.Get(CropType.Carrot).GetSeed());
     }
 
-    public void UseItem()
+    public Slot GetCurrentSlot()
+    {
+        return m_slots[m_currentSlotbarIndex];
+    }
+
+    public void UseItem(Player player)
     {
         if (m_usageZone.Contains(Camera.main.ScreenToWorldPoint(Input.mousePosition)))
         {
             Item it = m_slots[m_currentSlotbarIndex].item;
-            it?.useAction();
+            it?.useAction(player);
         }
     }
 
@@ -76,9 +83,11 @@ public class Inventory : MonoBehaviour
         if (m_usageZone.Contains(Camera.main.ScreenToWorldPoint(Input.mousePosition)))
         {
             m_cursorError.color = Color.clear; // Hide the warning
+            player.tileIndicator.UpdateState(true);
         } else
         {
             m_cursorError.color = Color.white;
+            player.tileIndicator.UpdateState(false);
         }
     }
 
@@ -105,7 +114,7 @@ public class Inventory : MonoBehaviour
     void Show()
     {
         float newX = 570;
-        LeanTween.moveX(m_inventoryBackground.gameObject, newX, 0.1f).setOnComplete(() => {
+        LeanTween.moveLocalX(m_inventoryBackground.gameObject, newX, 0.1f).setOnComplete(() => {
             m_inventoryContainer.SetActive(true);
 
             for (int i = s_slotbarCount; i < s_slotCount; i++)
@@ -118,7 +127,7 @@ public class Inventory : MonoBehaviour
     void Hide()
     {
         float newX = 130;
-        LeanTween.moveX(m_inventoryBackground.gameObject, newX, 0.1f);
+        LeanTween.moveLocalX(m_inventoryBackground.gameObject, newX, 0.1f);
         m_inventoryContainer.SetActive(false);
 
         for (int i = s_slotCount - 1; i >= s_slotbarCount; i--)

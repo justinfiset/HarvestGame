@@ -25,7 +25,7 @@ public class PlayerInteraction : MonoBehaviour
 
             if(!interacted)
             {
-                m_player.inventory.UseItem();
+                m_player.inventory.UseItem(m_player);
             }
         }
     }

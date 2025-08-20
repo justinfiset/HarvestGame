@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: WateredFieldTile
+  m_EditorClassIdentifier: Assembly-CSharp::TileAsset
+  Center: {fileID: 1503033809, guid: 5106df954c2462d4a931b79fd8565fba, type: 3}
+  TopBorder: {fileID: 957758649, guid: 5106df954c2462d4a931b79fd8565fba, type: 3}
+  BottomBorder: {fileID: 677379792, guid: 5106df954c2462d4a931b79fd8565fba, type: 3}
+  LeftBorder: {fileID: -1173125405, guid: 5106df954c2462d4a931b79fd8565fba, type: 3}
+  RightBorder: {fileID: 910546315, guid: 5106df954c2462d4a931b79fd8565fba, type: 3}
+  TopJunction: {fileID: -727623534, guid: 5106df954c2462d4a931b79fd8565fba, type: 3}
+  BottomJunction: {fileID: 798074229, guid: 5106df954c2462d4a931b79fd8565fba, type: 3}
+  LeftJunction: {fileID: 1874919669, guid: 5106df954c2462d4a931b79fd8565fba, type: 3}
+  RightJunction: {fileID: -1482781993, guid: 5106df954c2462d4a931b79fd8565fba, type: 3}
+  TopLeftJunction: {fileID: -2048446388, guid: 5106df954c2462d4a931b79fd8565fba, type: 3}
+  TopRightJunction: {fileID: -1609718774, guid: 5106df954c2462d4a931b79fd8565fba, type: 3}
+  BottomLeftJunction: {fileID: 1223372198, guid: 5106df954c2462d4a931b79fd8565fba, type: 3}
+  BottomRightJunction: {fileID: 1288361132, guid: 5106df954c2462d4a931b79fd8565fba, type: 3}
+  HorizontalJunctionTopLeft: {fileID: 1211798073, guid: 5106df954c2462d4a931b79fd8565fba, type: 3}
+  HorizontalJunctionTopRight: {fileID: -2128565267, guid: 5106df954c2462d4a931b79fd8565fba, type: 3}
+  HorizontalJunctionBottomLeft: {fileID: -1915585081, guid: 5106df954c2462d4a931b79fd8565fba, type: 3}
+  HorizontalJunctionBottomRight: {fileID: -2026359039, guid: 5106df954c2462d4a931b79fd8565fba, type: 3}
+  VerticalJunctionTopLeft: {fileID: -961461065, guid: 5106df954c2462d4a931b79fd8565fba, type: 3}
+  VerticalJunctionTopRight: {fileID: 1323759577, guid: 5106df954c2462d4a931b79fd8565fba, type: 3}
+  VerticalJunctionBottomLeft: {fileID: 902451919, guid: 5106df954c2462d4a931b79fd8565fba, type: 3}
+  VerticalJunctionBottomRight: {fileID: 1907163932, guid: 5106df954c2462d4a931b79fd8565fba, type: 3}
+  TopLeftInnerCorner: {fileID: -1320139595, guid: 5106df954c2462d4a931b79fd8565fba, type: 3}
+  TopRightInnerCorner: {fileID: 1004478657, guid: 5106df954c2462d4a931b79fd8565fba, type: 3}
+  BottomLeftInnerCorner: {fileID: -125361874, guid: 5106df954c2462d4a931b79fd8565fba, type: 3}
+  BottomRightInnerCorner: {fileID: -1690248492, guid: 5106df954c2462d4a931b79fd8565fba, type: 3}
+  TopLeftCorner: {fileID: -832147554, guid: 5106df954c2462d4a931b79fd8565fba, type: 3}
+  TopRightCorner: {fileID: -602685919, guid: 5106df954c2462d4a931b79fd8565fba, type: 3}
+  BottomLeftCorner: {fileID: 1543558195, guid: 5106df954c2462d4a931b79fd8565fba, type: 3}
+  BottomRightCorner: {fileID: 586941590, guid: 5106df954c2462d4a931b79fd8565fba, type: 3}

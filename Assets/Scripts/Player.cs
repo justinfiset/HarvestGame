@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private Inventory m_inventory; // Only to set in the editro
-    public Inventory inventory => m_inventory; // visible to every class
+    public Inventory inventory;
+    public WaterIndicator waterIndicator;
+    public TileIndicator tileIndicator;
+
+    private void Awake()
+    {
+        inventory.player = this;
+    }
 }
