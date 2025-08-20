@@ -9,7 +9,7 @@ public class FieldPlot : Tile, IPlayerInteractable
     [SerializeField] private TileAsset m_wateredTileAsset;
 
     [Header("Field")]
-    [SerializeField] Sprite[] m_plowStages;
+    [SerializeField] SpriteCollectionLibrary m_plowStages;
 
     private SpriteRenderer m_spriteRenderer;
     [SerializeField] private SpriteRenderer m_cropRenderer;
@@ -28,7 +28,7 @@ public class FieldPlot : Tile, IPlayerInteractable
 
     public void Start()
     {
-        m_maxPlowState = m_plowStages.Length;
+        m_maxPlowState = m_plowStages.collections.Count;
         m_spriteRenderer = GetComponent<SpriteRenderer>();
 
         NotifyUpdate();
@@ -142,7 +142,7 @@ public class FieldPlot : Tile, IPlayerInteractable
         }
         else
         {
-            m_spriteRenderer.sprite = m_plowStages[m_plowState];
+            m_spriteRenderer.sprite = m_plowStages.GetRandomFromCollection(m_plowState);
             m_spriteRenderer.color = Color.white;
             m_tileHolder.SetActive(false);
         }

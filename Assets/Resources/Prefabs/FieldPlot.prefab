@@ -271,8 +271,15 @@ MonoBehaviour:
   m_regularTileAsset: {fileID: 11400000, guid: 379ca620c70575d4b93309b0a011ca86, type: 2}
   m_wateredTileAsset: {fileID: 11400000, guid: d624982172d873d45ae81e11cfcd4744, type: 2}
   m_plowStages:
-  - {fileID: -1980057495, guid: 35e2ebf58b1ccf3448b3549b5ac2ec91, type: 3}
-  - {fileID: 834975930, guid: 35e2ebf58b1ccf3448b3549b5ac2ec91, type: 3}
+    collections:
+    - sprites:
+      - {fileID: -1980057495, guid: 35e2ebf58b1ccf3448b3549b5ac2ec91, type: 3}
+      - {fileID: 1784202342, guid: 35e2ebf58b1ccf3448b3549b5ac2ec91, type: 3}
+      - {fileID: -1225561207, guid: 35e2ebf58b1ccf3448b3549b5ac2ec91, type: 3}
+      - {fileID: -1474526387, guid: 35e2ebf58b1ccf3448b3549b5ac2ec91, type: 3}
+    - sprites:
+      - {fileID: -1390640048, guid: 35e2ebf58b1ccf3448b3549b5ac2ec91, type: 3}
+      - {fileID: 834975930, guid: 35e2ebf58b1ccf3448b3549b5ac2ec91, type: 3}
   m_cropRenderer: {fileID: 647585635629776092}
   m_readyIndicator: {fileID: 8364337161406990536}
   m_iconRenderer: {fileID: 8479617685427641812}
