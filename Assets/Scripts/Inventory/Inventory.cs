@@ -81,11 +81,6 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            Show(!m_isShowing);
-        }
-
         if (m_usageZone.Contains(Camera.main.ScreenToWorldPoint(Input.mousePosition)))
         {
             m_cursorError.color = Color.clear; // Hide the warning
@@ -109,16 +104,23 @@ public class Inventory : MonoBehaviour
         m_cursor.color = (m_cursor.sprite == null) ? Color.clear : Color.white;
     }
     
-    void Show(bool showStatus)
+    public void ToggleVisibility()
     {
-        m_isShowing = showStatus;
+        Show(!m_isShowing);
+    }
 
+    public void Show(bool showStatus)
+    {
         if (showStatus) Show();
         else Hide();
     }
 
-    void Show()
+    public void Show()
     {
+        if (m_isShowing) return;
+
+        m_isShowing = true;
+
         float newX = 570;
         LeanTween.moveLocalX(m_inventoryBackground.gameObject, newX, 0.1f).setOnComplete(() => {
             m_inventoryContainer.SetActive(true);
@@ -130,8 +132,17 @@ public class Inventory : MonoBehaviour
         });
     }
 
-    void Hide()
+    public bool IsOpen()
     {
+        return m_isShowing;
+    }
+
+    public void Hide()
+    {
+        if (!m_isShowing) return;
+
+        m_isShowing = false;
+
         float newX = 130;
         LeanTween.moveLocalX(m_inventoryBackground.gameObject, newX, 0.1f);
         m_inventoryContainer.SetActive(false);

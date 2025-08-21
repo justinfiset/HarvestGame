@@ -56,6 +56,6 @@ public class Slot : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        onClickAction();
+        if(onClickAction != null) onClickAction();
     }
 }

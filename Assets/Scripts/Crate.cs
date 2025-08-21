@@ -9,9 +9,7 @@ public class Crate : MonoBehaviour, IPlayerInteractable
 
     public bool Interact(Player player)
     {
-        if (player.cratePanel.IsAlreadyOpen()) return false;
-
-        player.cratePanel.ShowCrateUI(this);
+        player.cratePanel.ShowCrateUI(player, this);
         return true;
     }
 }
