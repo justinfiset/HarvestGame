@@ -35,6 +35,12 @@ public class Inventory : MonoBehaviour
         for(int i = 0; i < s_slotbarCount; i++)
         {
             Slot slot = Instantiate(m_slotTemplate, m_slotbarContainer.transform).GetComponent<Slot>();
+
+            int index = i;
+            slot.onClickAction = () => {
+                SetCurrentSelectItem(index); 
+            };
+
             m_slots.Add(slot);
             slot.SetVisibility(true, i * 0.1f);
         }

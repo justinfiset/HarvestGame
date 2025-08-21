@@ -15,7 +15,7 @@ public class SoundCollection
     public AudioClip GetRandom()
     {
         if (m_clips == null) return null;
-        int index = UnityEngine.Random.Range(0, m_clips.Count - 1);
+        int index = UnityEngine.Random.Range(0, m_clips.Count);
         return m_clips[index];
     }
 

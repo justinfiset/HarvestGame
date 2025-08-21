@@ -2,14 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using System;
 
 [RequireComponent(typeof(Image))]
 [RequireComponent(typeof(CanvasGroup))]
-public class Slot : MonoBehaviour
+public class Slot : MonoBehaviour, IPointerClickHandler
 {
     private static readonly string REGULAR_SLOT = "regular slot";
     private static readonly string SELECTED_SLOT = "selected slot";
 
+    public Action onClickAction;
     public Item item = null;
     public int quantity = 0;
 
@@ -49,5 +52,10 @@ public class Slot : MonoBehaviour
     public void SetVisibility(bool visibility, float animationDuration)
     {
         LeanTween.alphaCanvas(m_canvasGroup, visibility ? 1.0f : 0.0f, animationDuration);
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        onClickAction();
     }
 }
