@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     public WaterIndicator waterIndicator;
     public TileIndicator tileIndicator;
     public CrateUIPanel cratePanel;
+    public ItemTooltip tooltip;
 
     private void Awake()
     {

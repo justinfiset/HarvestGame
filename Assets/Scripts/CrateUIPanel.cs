@@ -20,6 +20,11 @@ public class CrateUIPanel : MonoBehaviour
         return m_currentCrate != null;
     }
         
+    public Crate GetCrate()
+    {
+        return m_currentCrate;
+    }
+
     public void ShowCrateUI(Player player, Crate crate)
     {
         player.inventory.Show();

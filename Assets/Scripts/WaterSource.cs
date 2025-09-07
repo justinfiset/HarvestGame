@@ -9,6 +9,9 @@ public class WaterSource : MonoBehaviour, IPlayerInteractable
     [SerializeField] private SoundCollection m_waterRefillCollection;
     private AudioSource m_audioSource;
 
+    [SerializeField] private string m_name;
+    [SerializeField] private string m_description;
+
     private void Start()
     {
         m_audioSource = GetComponent<AudioSource>();
@@ -30,5 +33,10 @@ public class WaterSource : MonoBehaviour, IPlayerInteractable
         }
 
         return false;
+    }
+
+    public ItemTooltipData GetTooltipData()
+    {
+        return new ItemTooltipData(m_name, m_description);
     }
 }

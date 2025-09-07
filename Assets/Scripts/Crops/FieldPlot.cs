@@ -26,6 +26,11 @@ public class FieldPlot : Tile, IPlayerInteractable
     private float m_growthTimer = 0.0f;
     private bool m_readyToHarvest = false;
 
+    public ItemTooltipData GetTooltipData()
+    {
+        return null;
+    }
+
     public void Start()
     {
         m_maxPlowState = m_plowStages.collections.Count;

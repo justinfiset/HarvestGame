@@ -10,23 +10,29 @@ public class PlayerInteraction : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(m_useKey))
+        bool shouldInteract = Input.GetKeyDown(m_useKey);
+
+        int layerMask = ~LayerMask.GetMask("IgnoreRaycast2D");
+        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, 100f, layerMask);
+
+        bool interacted = false;
+        if (hit)
         {
-            int layerMask = ~LayerMask.GetMask("IgnoreRaycast2D");
-            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, 100f, layerMask);
-
-            bool interacted = false;
-            if (hit)
+            IPlayerInteractable interaction = hit.transform.gameObject.GetComponent<IPlayerInteractable>();
+            if (interaction != null)
             {
-                IPlayerInteractable interaction = hit.transform.gameObject.GetComponent<IPlayerInteractable>();
-                if (interaction != null)
-                    interacted = interaction.Interact(m_player);
-            }
+                m_player.tooltip.DisplayTooltip(interaction.GetTooltipData());
 
-            if(!interacted)
-            {
-                m_player.inventory.UseItem(m_player);
+                if(shouldInteract) interacted = interaction.Interact(m_player);
             }
+        } else
+        {
+            m_player.tooltip.HideTooltip();
+        }
+
+        if (shouldInteract && !interacted)
+        {
+            m_player.inventory.UseItem(m_player);
         }
     }
 }

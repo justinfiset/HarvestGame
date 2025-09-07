@@ -19,4 +19,9 @@ public class TallGrass : MonoBehaviour, IPlayerInteractable
         Destroy(gameObject);
         return true;
     }
+
+    public ItemTooltipData GetTooltipData()
+    {
+        return new ItemTooltipData("Tall Grass", "Remove them to try and get new seeds.");
+    }
 }

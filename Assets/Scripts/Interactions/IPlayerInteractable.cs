@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IPlayerInteractable
+public interface IPlayerInteractable : IItemTooltip
 {
     public bool Interact(Player player);
 }
