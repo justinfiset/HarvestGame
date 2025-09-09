@@ -7,32 +7,45 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private Player m_player;
 
     private KeyCode m_useKey = KeyCode.Mouse0;
+    private Camera m_cam;
+
+    private Vector3 m_lastMousePos;
+
+    private void Start()
+    {
+        m_cam = Camera.main;
+    }
 
     private void Update()
     {
         bool shouldInteract = Input.GetKeyDown(m_useKey);
+        bool mouseMoved = (Input.mousePosition != m_lastMousePos);
 
-        int layerMask = ~LayerMask.GetMask("IgnoreRaycast2D");
-        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, 100f, layerMask);
-
-        bool interacted = false;
-        if (hit)
+        if (shouldInteract || mouseMoved)
         {
-            IPlayerInteractable interaction = hit.transform.gameObject.GetComponent<IPlayerInteractable>();
-            if (interaction != null)
+            int layerMask = ~LayerMask.GetMask("IgnoreRaycast2D");
+            RaycastHit2D hit = Physics2D.Raycast(m_cam.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, 100f, layerMask);
+
+            bool interacted = false;
+            if (hit)
             {
-                m_player.tooltip.DisplayTooltip(interaction.GetTooltipData());
+                IPlayerInteractable interaction = hit.transform.gameObject.GetComponent<IPlayerInteractable>();
+                if (interaction != null)
+                {
+                    m_player.tooltip.DisplayTooltip(interaction.GetTooltipData());
 
-                if(shouldInteract) interacted = interaction.Interact(m_player);
+                    if (shouldInteract) interacted = interaction.Interact(m_player);
+                }
             }
-        } else
-        {
-            m_player.tooltip.HideTooltip();
-        }
+            else
+            {
+                m_player.tooltip.HideTooltip();
+            }
 
-        if (shouldInteract && !interacted)
-        {
-            m_player.inventory.UseItem(m_player);
+            if (shouldInteract && !interacted)
+            {
+                m_player.inventory.UseItem(m_player);
+            }
         }
     }
 }

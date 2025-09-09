@@ -28,7 +28,9 @@ public class FieldPlot : Tile, IPlayerInteractable
 
     public ItemTooltipData GetTooltipData()
     {
-        return null;
+        if (m_crop != null)
+            return new ItemTooltipData(m_crop.GetName(), m_crop.GetData().CropDescription);
+        else return null;
     }
 
     public void Start()

@@ -15,4 +15,9 @@ public class Crop
     {
         return cropData.name;
     }
+
+    public CropData GetData()
+    {
+        return cropData;
+    }
 }

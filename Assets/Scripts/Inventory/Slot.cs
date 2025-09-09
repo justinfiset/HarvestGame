@@ -7,7 +7,7 @@ using System;
 
 [RequireComponent(typeof(Image))]
 [RequireComponent(typeof(CanvasGroup))]
-public class Slot : MonoBehaviour, IPointerClickHandler
+public class Slot : MonoBehaviour, IPointerClickHandler, IPlayerInteractable
 {
     private static readonly string REGULAR_SLOT = "regular slot";
     private static readonly string SELECTED_SLOT = "selected slot";
@@ -57,5 +57,16 @@ public class Slot : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         if(onClickAction != null) onClickAction();
+    }
+
+    public bool Interact(Player player)
+    {
+        // TODO: IMPL SLOT INTERACTION
+        throw new NotImplementedException();
+    }
+
+    public ItemTooltipData GetTooltipData()
+    {
+        return new ItemTooltipData(item.itemName, item.description);
     }
 }
